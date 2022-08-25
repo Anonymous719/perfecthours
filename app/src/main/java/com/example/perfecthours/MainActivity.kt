@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(signupIntent)
                 finish()
             }
-        },2000)
+        },1500)
 
     }
 
