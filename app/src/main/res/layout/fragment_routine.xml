@@ -15,16 +15,15 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:backgroundTint="@color/white"
-            app:icon="@drawable/ic_leftarrow"
-            app:iconTint="@color/black"
-            app:iconGravity="end"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@id/yymm"
+            app:icon="@drawable/ic_leftarrow"
+            app:iconGravity="end"
+            app:iconTint="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/yymm"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,11 +31,13 @@
             android:id="@+id/yymm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="2022 September"
+            android:text="2002 August"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textSize="22sp"
             app:layout_constraintEnd_toStartOf="@id/nextmonth"
             app:layout_constraintStart_toEndOf="@id/prevmonth"
+            app:layout_constraintBottom_toBottomOf="@+id/prevmonth"
             app:layout_constraintTop_toTopOf="@id/prevmonth" />
 
         <com.google.android.material.button.MaterialButton
@@ -44,101 +45,99 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:backgroundTint="@color/white"
-            app:icon="@drawable/ic_rightarrow"
-            app:iconTint="@color/black"
-            app:iconGravity="start"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="20sp"
+            app:icon="@drawable/ic_rightarrow"
+            app:iconGravity="start"
+            app:iconTint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/yymm"
+            app:layout_constraintBottom_toBottomOf="@+id/yymm"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sun"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:text="SUN"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/mon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toBottomOf="@+id/yymm"
+            tools:layout_editor_absoluteY="68dp" />
 
         <TextView
             android:id="@+id/mon"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="MON"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/tue"
             app:layout_constraintStart_toEndOf="@id/sun"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <TextView
             android:id="@+id/tue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+
             android:text="TUE"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/wed"
             app:layout_constraintStart_toEndOf="@id/mon"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <TextView
             android:id="@+id/wed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="WED"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/thur"
             app:layout_constraintStart_toEndOf="@id/tue"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <TextView
             android:id="@+id/thur"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="THUR"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/fri"
             app:layout_constraintStart_toEndOf="@id/wed"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <TextView
             android:id="@+id/fri"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="FRI"
             android:textAlignment="center"
             app:layout_constraintEnd_toStartOf="@id/sat"
             app:layout_constraintStart_toEndOf="@id/thur"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <TextView
             android:id="@+id/sat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:text="SAT"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/fri"
-            app:layout_constraintTop_toBottomOf="@id/prevmonth" />
+            app:layout_constraintTop_toTopOf="@id/sun" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sun" />
     </androidx.constraintlayout.widget.ConstraintLayout>

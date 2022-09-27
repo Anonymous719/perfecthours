@@ -5,55 +5,82 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.perfecthours.databinding.FragmentRoutineBinding
+import java.time.LocalDate
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class routine : Fragment(),CalendarAdapter.OnItemListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [routine.newInstance] factory method to
- * create an instance of this fragment.
- */
-class routine : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    companion object {
+        fun newInstance() = Fragment()
     }
+
+    private var fragbinding : FragmentRoutineBinding? = null
+    private var selectedDate : LocalDate? = null
+    private lateinit var daysInMonth: ArrayList<String>
+    private lateinit var calendarAdapter: CalendarAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_routine, container, false)
+        fragbinding = FragmentRoutineBinding.inflate(inflater, container, false)
+        selectedDate = LocalDate.now()
+        setMonthView()
+
+        fragbinding!!.prevmonth.setOnClickListener(){
+            selectedDate = selectedDate?.minusMonths(1)
+            setMonthView()
+        }
+        fragbinding!!.nextmonth.setOnClickListener(){
+            selectedDate = selectedDate?.plusMonths(1)
+            setMonthView()
+        }
+
+        return fragbinding!!.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment routine.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            routine().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun setMonthView(){
+        fragbinding?.yymm?.setText(monthYearFromDate(selectedDate))
+        daysInMonth = daysInMonthArray (selectedDate)
+
+        calendarAdapter = CalendarAdapter(daysInMonth, this)
+
+        var layoutManager:RecyclerView.LayoutManager = GridLayoutManager(this.context, 7)
+        fragbinding!!.calendar.setLayoutManager(layoutManager)
+        fragbinding!!.calendar.setAdapter(calendarAdapter)
     }
+
+    fun daysInMonthArray(date: LocalDate?):ArrayList<String>{
+        var daysInMonthArray= ArrayList<String>()
+        var yearMonth: YearMonth = YearMonth.from(date)
+
+        var daysInMonth = yearMonth.lengthOfMonth()
+
+        var firstOfMonth : LocalDate = selectedDate!!.withDayOfMonth(1)
+        var dayOfWeek = firstOfMonth.dayOfWeek.value
+
+        for (i in 1..42){
+            if (i<dayOfWeek || i>daysInMonth+dayOfWeek){
+                daysInMonthArray.add("")
+            }else{
+                var temp = i-dayOfWeek
+                daysInMonthArray.add(temp.toString())
+            }
+        }
+        return daysInMonthArray
+    }
+
+    fun monthYearFromDate(date: LocalDate?):String{
+        val formatter:DateTimeFormatter  = DateTimeFormatter.ofPattern("MMMM yyyy")
+        return date?.format(formatter) ?: String()
+    }
+
+    override fun onItemClick(position: Int, dayText: String?) {
+
+    }
+
 }
