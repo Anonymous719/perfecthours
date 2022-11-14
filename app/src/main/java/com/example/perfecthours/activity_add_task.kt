@@ -42,7 +42,7 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
         binding.add.setOnClickListener {
             var success:Boolean = false
-            var task : TaskListModel = TaskListModel()
+            var task = TaskListModel()
             task.name = binding.name.text.toString()
             task.details = binding.details.text.toString()
 

@@ -36,20 +36,21 @@ class routine : Fragment() {
     ): View? {
         fragbinding = FragmentRoutineBinding.inflate(inflater, container, false)
 
-        dbHandler = DatabaseHelper(context)
+        dbHandler = DatabaseHelper(requireContext())
 
         fragbinding!!.btnAdd.setOnClickListener {
             val i = Intent(getActivity()?.getApplicationContext(), activity_add_task::class.java)
             startActivity(i)
         }
 
+        fetchList()
         return fragbinding!!.root
     }
 
     private fun fetchList(){
         taskList = dbHandler!!.getAllTasks()
-        tasklistAdapter = TaskListAdapter(taskList, applicationContext)
-        linearLayoutManager = LinearLayoutManager(getActivity()?.getApplicationContext())
+        tasklistAdapter = TaskListAdapter(taskList, requireActivity().getApplicationContext())
+        linearLayoutManager = LinearLayoutManager(requireActivity().getApplicationContext())
         fragbinding?.schedulerecycler?.layoutManager = linearLayoutManager
         fragbinding?.schedulerecycler?.adapter = tasklistAdapter
         tasklistAdapter?.notifyDataSetChanged()
