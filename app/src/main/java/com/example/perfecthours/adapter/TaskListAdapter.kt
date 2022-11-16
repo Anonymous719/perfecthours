@@ -19,6 +19,8 @@ class TaskListAdapter(taskList: List<TaskListModel>, internal val context: Conte
     inner class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var name: TextView = view.findViewById(R.id.name)
         var details: TextView = view.findViewById(R.id.details)
+        var date: TextView = view.findViewById(R.id.date)
+        var time: TextView = view.findViewById(R.id.time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -30,6 +32,8 @@ class TaskListAdapter(taskList: List<TaskListModel>, internal val context: Conte
         val task = taskList[position]
         holder.name.text = task.name
         holder.details.text = task.details
+        holder.date.text = task.date
+        holder.time.text = task.time
     }
 
     override fun getItemCount(): Int {

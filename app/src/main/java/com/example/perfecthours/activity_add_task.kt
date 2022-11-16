@@ -45,7 +45,12 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             var task = TaskListModel()
             task.name = binding.name.text.toString()
             task.details = binding.details.text.toString()
-
+            task.date = "$savedYear/$savedMonth/$savedDay"
+            if (savedMinute == 0){
+                task.time = "$savedHour:$savedMinute"+"0"
+            }else {
+                task.time = "$savedHour:$savedMinute"
+            }
             success = dbHandler?.addTask(task) as Boolean
 
             if(success){
@@ -57,15 +62,6 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
     }
 
-    private fun getDateTimeCalendar() {
-        val cal = Calendar.getInstance()
-        day = cal.get(Calendar.DAY_OF_MONTH)
-        month = cal.get(Calendar.MONTH)
-        year = cal.get(Calendar.YEAR)
-        hour = cal.get(Calendar.HOUR)
-        minute = cal.get(Calendar.MINUTE)
-    }
-
     private fun pickDate(){
         binding.selectDate.setOnClickListener {
             getDateTimeCalendar()
@@ -75,6 +71,17 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
         }
     }
 
+    private fun getDateTimeCalendar() {
+        val cal = Calendar.getInstance()
+        day = cal.get(Calendar.DAY_OF_MONTH)
+        month = cal.get(Calendar.MONTH)
+        year = cal.get(Calendar.YEAR)
+        hour = cal.get(Calendar.HOUR)
+        minute = cal.get(Calendar.MINUTE)
+    }
+
+
+
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         savedDay = dayOfMonth
         savedMonth = month
@@ -82,13 +89,20 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
         getDateTimeCalendar()
 
-        TimePickerDialog(this,this,hour,minute,true).show()
+        TimePickerDialog(this,this,hour,minute,false).show()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         savedHour = hourOfDay
         savedMinute = minute
 
-        binding.selectDate.text = "$savedYear/$savedMonth/$savedDay  $savedHour:$savedMinute"
+        savedMonth++
+        if (savedMinute == 0) {
+            binding.selectDate.text = "$savedYear/$savedMonth/$savedDay  $savedHour:$savedMinute"+"0"
+        }else{
+            binding.selectDate.text = "$savedYear/$savedMonth/$savedDay  $savedHour:$savedMinute"
+        }
+
+
     }
 }

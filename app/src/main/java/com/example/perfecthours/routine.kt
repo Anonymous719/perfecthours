@@ -38,11 +38,6 @@ class routine : Fragment() {
 
         dbHandler = DatabaseHelper(requireContext())
 
-        fragbinding!!.btnAdd.setOnClickListener {
-            val i = Intent(getActivity()?.getApplicationContext(), activity_add_task::class.java)
-            startActivity(i)
-        }
-
         fetchList()
         return fragbinding!!.root
     }
