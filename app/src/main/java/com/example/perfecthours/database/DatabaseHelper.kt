@@ -18,10 +18,12 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
         private val ID = "id"
         private val TASK_NAME = "taskname"
         private val TASK_DETAILS = "taskdetails"
+        private val TASK_DATE = "taskdate"
+        private val TASK_TIME = "tasktime"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY, $TASK_NAME TEXT, $TASK_DETAILS TEXT);"
+    val CREATE_TABLE = "CREATE TABLE $TABLE_NAME ($ID INTEGER PRIMARY KEY, $TASK_NAME TEXT, $TASK_DETAILS TEXT, $TASK_DATE TEXT, $TASK_TIME TEXT);"
         db?.execSQL(CREATE_TABLE)
     }
 
@@ -44,6 +46,8 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
                     tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
                     tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
                     tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
+                    tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
+                    tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
                     tasklist.add(tasks)
                 }while(cursor.moveToNext())
             }
@@ -57,6 +61,8 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
         val values = ContentValues()
         values.put(TASK_NAME,task.name)
         values.put(TASK_DETAILS,task.details)
+        values.put(TASK_DATE,task.date)
+        values.put(TASK_TIME,task.time)
         val _success = dab.insert(TABLE_NAME,null,values)
         dab.close()
         return (Integer.parseInt("$_success")!=-1)
@@ -73,6 +79,8 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
         tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
         tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
         tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
+        tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
+        tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
         cursor.close()
         return tasks
     }
@@ -89,6 +97,8 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
         val values = ContentValues()
         values.put(TASK_NAME,task.name)
         values.put(TASK_DETAILS,task.details)
+        values.put(TASK_DATE,task.date)
+        values.put(TASK_TIME,task.time)
         val _success = dab.update(TABLE_NAME, values, ID+"=?", arrayOf(task.id.toString())).toLong()
         dab.close()
         return (Integer.parseInt("$_success")!=-1)
