@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.perfecthours.model.TaskListModel
 import com.google.android.gms.tasks.Task
 import java.util.Date
@@ -69,20 +70,30 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
     }
 
     @SuppressLint("Range")
-    fun getTask(_id:Int):TaskListModel{
-        val tasks = TaskListModel()
+    fun getTask(date: String):List<TaskListModel>{
+        val tasklist = ArrayList<TaskListModel>()
         val dab = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME WHERE ID = $_id"
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
         val cursor = dab.rawQuery(selectQuery,null)
-
-        cursor?.moveToFirst()
-        tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
-        tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
-        tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
-        tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
-        tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
+        if(cursor!=null){
+            if(cursor.moveToFirst()){
+                do{
+                    val tasks = TaskListModel()
+                    tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
+                    tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
+                    tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
+                    tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
+                    tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
+                    if(tasks.date == date){
+                        Log.d("Dated",date)
+                        Log.d("Dated",tasks.date)
+                        tasklist.add(tasks)
+                    }
+                }while(cursor.moveToNext())
+            }
+        }
         cursor.close()
-        return tasks
+        return tasklist
     }
 
     fun deleteTask(_id:Int):Boolean{

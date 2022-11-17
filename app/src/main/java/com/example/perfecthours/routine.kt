@@ -2,10 +2,12 @@ package com.example.perfecthours
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CalendarView
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,8 @@ import com.example.perfecthours.model.TaskListModel
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class routine : Fragment() {
 
@@ -25,6 +29,9 @@ class routine : Fragment() {
     }
 
     private var fragbinding : FragmentRoutineBinding? = null
+
+
+    var date: String = ""
     var tasklistAdapter : TaskListAdapter ?= null
     var dbHandler : DatabaseHelper ?= null
     var taskList: List<TaskListModel> = ArrayList<TaskListModel>()
@@ -36,14 +43,37 @@ class routine : Fragment() {
     ): View? {
         fragbinding = FragmentRoutineBinding.inflate(inflater, container, false)
 
-        dbHandler = DatabaseHelper(requireContext())
+        fragbinding!!.calendarView.setOnDateChangeListener { calView: CalendarView, year: Int, month: Int, dayOfMonth: Int ->
 
-        fetchList()
+            // Create calender object with which will have system date time.
+            val calender: Calendar = Calendar.getInstance()
+
+            // Set attributes in calender object as per selected date.
+            calender.set(year, month, dayOfMonth)
+
+            // Now set calenderView with this calender object to highlight selected date on UI.
+            calView.setDate(calender.timeInMillis, true, true)
+            Log.d("SelectedDate", "$dayOfMonth/${month + 1}/$year")
+            date = "$year/${month + 1}/$dayOfMonth"
+            Log.d("Date",date)
+
+            dbHandler = DatabaseHelper(requireContext())
+
+            fetchList(date)
+
+        }
+
+
+
+
         return fragbinding!!.root
     }
 
-    private fun fetchList(){
-        taskList = dbHandler!!.getAllTasks()
+
+
+
+    private fun fetchList(date:String){
+        taskList = dbHandler!!.getTask(date)
         tasklistAdapter = TaskListAdapter(taskList, requireActivity().getApplicationContext())
         linearLayoutManager = LinearLayoutManager(requireActivity().getApplicationContext())
         fragbinding?.schedulerecycler?.layoutManager = linearLayoutManager
