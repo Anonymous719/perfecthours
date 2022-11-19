@@ -4,9 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.perfecthours.R
+import com.example.perfecthours.database.DatabaseHelper
 import com.example.perfecthours.model.TaskListModel
 
 class TaskListAdapter(taskList: List<TaskListModel>, internal val context: Context): RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
@@ -21,6 +23,7 @@ class TaskListAdapter(taskList: List<TaskListModel>, internal val context: Conte
         var details: TextView = view.findViewById(R.id.details)
         var date: TextView = view.findViewById(R.id.date)
         var time: TextView = view.findViewById(R.id.time)
+        var removebtn: Button = view.findViewById(R.id.removebtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -34,6 +37,7 @@ class TaskListAdapter(taskList: List<TaskListModel>, internal val context: Conte
         holder.details.text = task.details
         holder.date.text = task.date
         holder.time.text = task.time
+
     }
 
     override fun getItemCount(): Int {
