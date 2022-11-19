@@ -9,16 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56c233e2-b8a9-4296-9fb0-0d02e5f3dc66" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/perfecthours/FirebaseInstanceIdService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/perfecthours/MyFirebaseMessagingService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/drawable-v24/vectorimage.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/layout/notification.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../vectorimage.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
-    </list>
+    <list default="true" id="56c233e2-b8a9-4296-9fb0-0d02e5f3dc66" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
