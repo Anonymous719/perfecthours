@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1033749039750",
+    "project_id": "perfect-hours",
+    "storage_bucket": "perfect-hours.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033749039750:android:67628f3d6c8b23fcc15f07",
+        "android_client_info": {
+          "package_name": "com.example.perfecthours"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033749039750-n3m2p1kasntlh0u13ev99ol8ld4ahc4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.perfecthours",
+            "certificate_hash": "5144750a2ff616f1b68b63f03fdfabbec15dd973"
+          }
+        },
+        {
+          "client_id": "1033749039750-5pi76dtej0jvoql7lltkv6b9vg3p84cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-WlnyBaHhxD3qP2RQPax82vszrQJmKKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033749039750-5pi76dtej0jvoql7lltkv6b9vg3p84cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

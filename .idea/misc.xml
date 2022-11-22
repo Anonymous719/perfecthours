@@ -3,6 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/drawable/ic_deadline.xml" value="0.1" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/drawable/ic_profile.xml" value="0.1" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/drawable/ic_routine.xml" value="0.1" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/activity_loggedin.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/activity_signup.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/activity_singup.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/calendar_cell.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/calender_cell.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/fragment_deadline.xml" value="0.14130434782608695" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/layout/fragment_routine.xml" value="0.22" />
+        <entry key="..\:/Projects/perfecthours/app/src/main/res/menu/bottomnavoptions.xml" value="0.1796875" />
         <entry key="..\:/end sem project/perfecthours/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
       </map>
     </option>

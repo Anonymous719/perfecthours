@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/routine"
+        android:icon="@drawable/ic_routine"
+        android:title="Routine"/>
+
+    <item
+        android:id="@+id/deadline"
+        android:icon="@drawable/ic_deadline"
+        android:title="Deadlines"/>
+
+    <item
+        android:id="@+id/placeholder"
+        android:title=" "/>
+
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/ic_notification"
+        android:title="Notifications"/>
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
+        android:title="Profile"/>
+
+</menu>
