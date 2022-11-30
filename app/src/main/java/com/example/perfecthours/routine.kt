@@ -74,6 +74,7 @@ class routine : Fragment() {
 
     private fun fetchList(date:String){
         taskList = dbHandler!!.getTask(date)
+        Log.d("task",taskList.size.toString())
         tasklistAdapter = TaskListAdapter(taskList, requireActivity().getApplicationContext())
         linearLayoutManager = LinearLayoutManager(requireActivity().getApplicationContext())
         fragbinding?.schedulerecycler?.layoutManager = linearLayoutManager

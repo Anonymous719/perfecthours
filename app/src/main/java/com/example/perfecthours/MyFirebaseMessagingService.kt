@@ -41,7 +41,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
         builder=builder.setContent(getRemoteView(title,message))
         // val notificationManager= GetSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        override fun onMessageReceived(message: RemoteMessage) {
+        fun onMessageReceived(message: RemoteMessage) {
             super.onMessageReceived(message)
         }
 

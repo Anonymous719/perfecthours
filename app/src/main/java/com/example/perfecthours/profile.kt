@@ -1,14 +1,27 @@
 package com.example.perfecthours
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.example.perfecthours.adapter.TaskListAdapter
+import com.example.perfecthours.database.DatabaseHelper
 import com.example.perfecthours.databinding.FragmentProfileBinding
+import com.example.perfecthours.model.TaskListModel
 import com.google.firebase.auth.FirebaseAuth
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.GridLabelRenderer
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
+import java.util.*
+import kotlin.collections.ArrayList
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class profile : Fragment() {
 
@@ -18,6 +31,10 @@ class profile : Fragment() {
 
     private lateinit var mAuth: FirebaseAuth
     private var fragbinding : FragmentProfileBinding? = null
+    lateinit var lineGraphView: GraphView
+    var date: String = ""
+    var dbHandler : DatabaseHelper?= null
+    var taskList: List<TaskListModel> = ArrayList<TaskListModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +53,58 @@ class profile : Fragment() {
                 finish()
             }
         }
+
+        lineGraphView = fragbinding!!.graphview
+
+        var current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        date = current.format(formatter).toString()
+
+        Log.d("Date", date)
+        var productive: MutableList<Int> = mutableListOf()
+
+        for (i in 1..8){
+            current = LocalDateTime.now().minusDays(i.toLong())
+            date = current.format(formatter).toString()
+            Log.d("Date1", date)
+            //taskList = dbHandler!!.getTask(date)
+            productive.add(taskList.size)
+            //productive.add(8-i)
+        }
+
+
+        val series: LineGraphSeries<DataPoint> = LineGraphSeries(
+            arrayOf(
+                DataPoint(0.0, 8.0),
+                DataPoint(1.0, 4.0),
+                DataPoint(2.0, 4.0),
+                DataPoint(3.0, 5.0),
+                DataPoint(4.0, 9.0),
+                DataPoint(5.0, 6.0),
+                DataPoint(6.0, 4.0),
+                DataPoint(7.0, 7.0)
+            )
+        )
+        lineGraphView.gridLabelRenderer.isVerticalLabelsVisible = false
+        lineGraphView.gridLabelRenderer.gridStyle = GridLabelRenderer.GridStyle.NONE;
+        series.thickness = 10
+        series.isDrawDataPoints = true
+        series.color = R.color.black
+        series.isDrawBackground = true;
+        series.color = Color.argb(255, 255, 60, 60);
+        series.backgroundColor = Color.argb(100, 204, 119, 119);
+        lineGraphView.gridLabelRenderer.numHorizontalLabels = 7
+        lineGraphView.viewport.setMinX(1.0)
+        lineGraphView.viewport.setMaxX(7.0)
+        lineGraphView.viewport.setMinY(0.0)
+        lineGraphView.viewport.setMaxY(10.0)
+
+        lineGraphView.viewport.isYAxisBoundsManual = true
+        lineGraphView.viewport.isXAxisBoundsManual = true
+
+        lineGraphView.addSeries(series)
+
         return fragbinding!!.root
     }
 

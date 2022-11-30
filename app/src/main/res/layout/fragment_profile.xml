@@ -20,8 +20,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -32,10 +32,10 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_margin="15dp"
-                        app:shapeAppearanceOverlay="@style/Circular"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:shapeAppearanceOverlay="@style/Circular"
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
@@ -44,9 +44,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="TextView"
+                        android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/profileimage" />
@@ -68,60 +68,72 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
-                        android:paddingBottom="20dp"
                         android:backgroundTint="@color/white"
+                        android:paddingBottom="20dp"
                         android:text="Productivity Chart"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"
                         android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/email" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/deadline"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/graphHolder"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="20dp"
-                        android:backgroundTint="@color/white"
-                        android:text="Deadlines"
-                        android:textAlignment="viewStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
+                        android:layout_margin="5dp"
+                        app:cardBackgroundColor="#FFFFFF"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/productivity" />
+                        app:layout_constraintTop_toBottomOf="@+id/productivity">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/settings"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="20dp"
-                        android:backgroundTint="@color/white"
-                        android:text="Settings"
-                        android:textAlignment="viewStart"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/deadline" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#FFFFFF"
+                            android:backgroundTint="#FFFFFF"
+                            android:padding="5dp">
+
+                            <com.jjoe64.graphview.GraphView
+                                android:id="@+id/graphview"
+                                android:layout_width="match_parent"
+                                android:layout_height="250dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Days"
+                                app:layout_constraintEnd_toEndOf="@id/graphview"
+                                app:layout_constraintStart_toStartOf="@id/graphview"
+                                app:layout_constraintTop_toBottomOf="@+id/graphview" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/signoutbtn"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="20dp"
+                        android:layout_marginTop="24dp"
                         android:backgroundTint="@color/white"
+                        android:paddingBottom="20dp"
                         android:text="Sign Out"
                         android:textAlignment="viewStart"
                         android:textAllCaps="false"
                         android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/settings" />
+                        app:layout_constraintTop_toBottomOf="@+id/graphHolder" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
