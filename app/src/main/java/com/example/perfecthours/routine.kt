@@ -17,6 +17,7 @@ import com.example.perfecthours.database.DatabaseHelper
 import com.example.perfecthours.databinding.FragmentRoutineBinding
 import com.example.perfecthours.model.TaskListModel
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -43,6 +44,13 @@ class routine : Fragment() {
     ): View? {
         fragbinding = FragmentRoutineBinding.inflate(inflater, container, false)
 
+        var current = LocalDateTime.now()
+
+        dbHandler = DatabaseHelper(requireContext())
+        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        date = current.format(formatter).toString()
+        fetchList(date)
+
         fragbinding!!.calendarView.setOnDateChangeListener { calView: CalendarView, year: Int, month: Int, dayOfMonth: Int ->
 
             // Create calender object with which will have system date time.
@@ -53,24 +61,14 @@ class routine : Fragment() {
 
             // Now set calenderView with this calender object to highlight selected date on UI.
             calView.setDate(calender.timeInMillis, true, true)
-            Log.d("SelectedDate", "$dayOfMonth/${month + 1}/$year")
             date = "$year/${month + 1}/$dayOfMonth"
             Log.d("Date",date)
-
-            dbHandler = DatabaseHelper(requireContext())
 
             fetchList(date)
 
         }
-
-
-
-
         return fragbinding!!.root
     }
-
-
-
 
     private fun fetchList(date:String){
         taskList = dbHandler!!.getTask(date)

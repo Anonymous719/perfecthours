@@ -63,27 +63,27 @@ class profile : Fragment() {
 
         Log.d("Date", date)
         var productive: MutableList<Int> = mutableListOf()
-
+        dbHandler = DatabaseHelper(requireContext())
         for (i in 1..8){
             current = LocalDateTime.now().minusDays(i.toLong())
             date = current.format(formatter).toString()
             Log.d("Date1", date)
-            //taskList = dbHandler!!.getTask(date)
+            taskList = dbHandler!!.getTask(date)
             productive.add(taskList.size)
-            //productive.add(8-i)
+
         }
 
 
         val series: LineGraphSeries<DataPoint> = LineGraphSeries(
             arrayOf(
-                DataPoint(0.0, 8.0),
-                DataPoint(1.0, 4.0),
-                DataPoint(2.0, 4.0),
-                DataPoint(3.0, 5.0),
-                DataPoint(4.0, 9.0),
-                DataPoint(5.0, 6.0),
-                DataPoint(6.0, 4.0),
-                DataPoint(7.0, 7.0)
+                DataPoint(0.0, productive[7].toDouble()),
+                DataPoint(1.0, productive[6].toDouble()),
+                DataPoint(2.0, productive[5].toDouble()),
+                DataPoint(3.0, productive[4].toDouble()),
+                DataPoint(4.0, productive[3].toDouble()),
+                DataPoint(5.0, productive[2].toDouble()),
+                DataPoint(6.0, productive[1].toDouble()),
+                DataPoint(7.0, productive[0].toDouble())
             )
         )
         lineGraphView.gridLabelRenderer.isVerticalLabelsVisible = false

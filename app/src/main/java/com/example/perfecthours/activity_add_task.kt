@@ -54,7 +54,7 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
             success = dbHandler?.addTask(task) as Boolean
 
             if(success){
-                val i = Intent(applicationContext,routine::class.java)
+                val i = Intent(applicationContext,loggedin::class.java)
                 startActivity(i)
                 finish()
             }
@@ -89,7 +89,7 @@ class activity_add_task : AppCompatActivity(), DatePickerDialog.OnDateSetListene
 
         getDateTimeCalendar()
 
-        TimePickerDialog(this,this,hour,minute,false).show()
+        TimePickerDialog(this,this,hour,minute,true).show()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
