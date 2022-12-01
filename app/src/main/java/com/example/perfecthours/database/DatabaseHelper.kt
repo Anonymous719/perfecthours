@@ -87,8 +87,6 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
                     tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
                     tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
                     if(tasks.date == date){
-                        Log.d("Dated",date)
-                        Log.d("Dated",tasks.date)
                         tasklist.add(tasks)
                     }
                 }while(cursor.moveToNext())
@@ -115,67 +113,5 @@ class DatabaseHelper(context: Context) :SQLiteOpenHelper(context, DB_NAME, null,
         val _success = dab.update(TABLE_NAME, values, ID+"=?", arrayOf(task.id.toString())).toLong()
         dab.close()
         return (Integer.parseInt("$_success")!=-1)
-    }
-
-    @SuppressLint("Range")
-    fun getBeforeTask():List<TaskListModel>{
-
-        var current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
-        var date = current.format(formatter).toString()
-
-        val tasklist = ArrayList<TaskListModel>()
-        val dab = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
-        val cursor = dab.rawQuery(selectQuery,null)
-        if(cursor!=null){
-            if(cursor.moveToFirst()){
-                do{
-                    val tasks = TaskListModel()
-                    tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
-                    tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
-                    tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
-                    tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
-                    tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
-                    if(tasks.date == date){
-                        Log.d("Dated",date)
-                        Log.d("Dated",tasks.date)
-                        tasklist.add(tasks)
-                    }
-                }while(cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        return tasklist
-    }
-
-    @SuppressLint("Range")
-    fun getAfterTask():List<TaskListModel>{
-        var current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
-        var date = current.format(formatter).toString()
-
-        val tasklist = ArrayList<TaskListModel>()
-        val dab = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
-        val cursor = dab.rawQuery(selectQuery,null)
-        if(cursor!=null){
-            if(cursor.moveToFirst()){
-                do{
-                    val tasks = TaskListModel()
-                    tasks.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(ID)))
-                    tasks.name = cursor.getString(cursor.getColumnIndex(TASK_NAME))
-                    tasks.details = cursor.getString(cursor.getColumnIndex(TASK_DETAILS))
-                    tasks.date = cursor.getString(cursor.getColumnIndex(TASK_DATE))
-                    tasks.time = cursor.getString(cursor.getColumnIndex(TASK_TIME))
-                    if(tasks.date == date){
-
-                        tasklist.add(tasks)
-                    }
-                }while(cursor.moveToNext())
-            }
-        }
-        cursor.close()
-        return tasklist
     }
 }
